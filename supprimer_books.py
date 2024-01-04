@@ -1,8 +1,7 @@
-import pymongo
-from pymongo import MongoClient
+import config
 
-client = MongoClient("localhost",27017)
-db = client["Bibliotheque"]
+client = config.client
+db = config.db
 
 class Delete(object):
 

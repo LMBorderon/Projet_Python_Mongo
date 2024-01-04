@@ -1,8 +1,7 @@
-import pymongo
-from pymongo import MongoClient
+import config
 
-client = MongoClient("localhost",27017)
-db = client["Bibliotheque"]
+client = config.client
+db = config.db
 
 class Search(object):
  
@@ -15,7 +14,7 @@ class Search(object):
             "$or":[
                 {"type":{"$regex":search_query,"$options":"i"}},
                 {"title":{"$regex":search_query,"$options":"i"}},
-                {"year":{"$regex":search_query,"$options":"i"}},
+                {"year":{"$eq":search_query}},
                 {"booktitle":{"$regex":search_query,"$options":"i"}},
                 {"authors":{"$regex":search_query,"$options":"i"}},
             ]}).limit(10)
@@ -33,7 +32,7 @@ class Search(object):
 
   @staticmethod
   def filter_year(input_year):
-            result_3 = db["books"].find({"year":{"$regex":input_year,"$options":"i"}}).limit(10)
+            result_3 = db["books"].find({"year":{"$eq":input_year}}).limit(10)
             return result_3
 
   @staticmethod
@@ -45,3 +44,16 @@ class Search(object):
   def filter_authors(input_author):
             result_5 = db["books"].find({"authors":{"$regex":input_author,"$options":"i"}}).limit(10)
             return result_5
+
+  # fonction Count générique
+  # @staticmethod
+  # def count_docs(input_exist):
+  #        result_exist = db["books"].count_documents({
+  #           "$or":[
+  #               {"type":{"$regex":input_exist,"$options":"i"}},
+  #               {"title":{"$regex":input_exist,"$options":"i"}},
+  #               {"year":{"$eq":input_exist}},
+  #               {"booktitle":{"$regex":input_exist,"$options":"i"}},
+  #               {"authors":{"$regex":input_exist,"$options":"i"}},
+  #           ]})
+  #        return result_exist
