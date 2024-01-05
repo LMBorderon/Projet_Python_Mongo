@@ -198,7 +198,7 @@ class Nav_and_view(object):
          supp_type = input("Supprimer quel type : ")
          result = Delete.supp_type(supp_type)
          print(f"Document(s) de type - {supp_type} - supprimé de votre bibliothèque !")
-
+       
      # suppression par titre
     def supp_par_titre(self):
          supp_title = input("Supprimer le titrre : ")
