@@ -10,9 +10,10 @@ This library system includes :
 
 
 Before starting, some tips :
+- All instructions are in FRENCH ! An english version will come later.
 - Pymongo required
 - Use collection "books" in JSON file, to insert in your database MongdoDB.
 - Change the name of your database in config.py
-- Tests on main_project.py   ( WARNING : all instructions are in FRENCH, an english will come later )
+- Tests on main_project.py  
 
   Enjoy !
