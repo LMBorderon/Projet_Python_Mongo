@@ -13,6 +13,6 @@ Before starting, some tips :
 - Pymongo required
 - Use collection "books" in JSON file, to insert in your database MongdoDB.
 - Change the name of your database in config.py
-- Tests on main_project.py ( WARNING : all instructions are in FRENCH, an english will come later )
+- Tests on main_project.py   ( WARNING : all instructions are in FRENCH, an english will come later )
 
   Enjoy !
