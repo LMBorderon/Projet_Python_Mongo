@@ -15,6 +15,6 @@ Before starting, some tips :
 - Use collection "books" in JSON file, to insert in your database MongdoDB.
 - Change the name of your database in config.py
 - Tests on main_project.py
-- Some instructions at the end may lead you back at the beginning, this means the document doesn't exist. 
+- Some instructions at the end may lead you back at the beginning, this means the file(s) doesn't exist. 
 
   Enjoy !
