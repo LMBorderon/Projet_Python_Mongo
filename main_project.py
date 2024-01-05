@@ -282,6 +282,7 @@ nav_instance.supp_par_titre()
 nav_instance.supp_par_annee()
 nav_instance.supp_par_cat()
 nav_instance.supp_par_auteur()
+nav_instance.statistics()
 
 
 
