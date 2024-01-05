@@ -18,18 +18,17 @@ class Nav_and_view(object):
          
         while True :
          print("--------------------------------------------------------------------------------------------------------")
-         accueil_menu = input("Bienvenue en Bibiothèque ! Souhaitez-vous faire une recherche (1), un ajout (2) ou supprimer (3) des documents ? / Quitter (quit) : ")
+         accueil_menu = input("Bienvenue en Bibiothèque ! Souhaitez-vous faire : recherche (1), ajout (2), supprimer (3), statistiques (4) des documents ? / Quitter (quit) : ")
 
          if accueil_menu =="1":
              self.mode_recherche()
-
-         if accueil_menu =="2":
+         elif accueil_menu =="2":
               self.ajout_book()
-         
-         if accueil_menu =="3":
+         elif accueil_menu =="3":
               self.mode_suppression()
-
-         if accueil_menu =="quit":
+         elif accueil_menu=="4":
+              self.statistics()
+         elif accueil_menu =="quit":
              break
 
     # Mode de recherche ( filtrage ou classique )
@@ -231,8 +230,38 @@ class Nav_and_view(object):
          supp_tot_authors = Delete.supp_auteur(tas_auteurs)
          print(f"La/Les auteur(s) {tas_auteurs} supprimé de la bibliothèque !")
 
-     
+     # Statistiques
+    def statistics(self):
+         choix_stat = input(" Afficher ? Nombre de publications par année (1), leur moyenne des années (2), leur total par type (3) : ") 
 
+         if choix_stat=="1":
+              choix_year = int(input("Indiquer l'année : "))
+              post_per_year = db["books"].aggregate([
+                   {"$match":{"year":{"$eq":choix_year}}},
+                   {"$group":{"_id":"$year","nb":{"$sum":1}}},
+                   {"$sort":{"_id":1}}
+                   ])
+              for b in post_per_year:
+                 pprint.pprint(b)
+                 print("-----------------------------------------------")
+
+         elif choix_stat=="2":
+              choix_moy_year = input("Indiquer le type ( Article, Book, Phd, ...) : ")
+              result = db["books"].aggregate([
+                   {"$match":{"type":{"$eq":choix_moy_year}}},
+                   {"$group":{"_id":"$type","moyenneAnnees":{"$avg":"$year"}}}
+                   ])
+              for b in result:
+                   pprint.pprint(b)
+                   print("-----------------------------------------------")
+
+         elif choix_stat=="3":
+              result = db["books"].aggregate([{"$group":{"_id":"$type","nb":{"$sum":1}}}])
+              for b in result :
+                   pprint.pprint(b)
+                   print("-----------------------------------------------")
+                         
+              
 # Activation méthodes Nav_and_view
 nav_instance = Nav_and_view()
 nav_instance.run()        
